@@ -1,5 +1,5 @@
 pragma solidity ^0.4.4;
-import './AddressList.sol';
+import 'lib/AddressList.sol';
 
 /**
  * @dev Iterable by index (string => address) mapping structure
