@@ -9,15 +9,9 @@ module.exports = function(deployer) {
     deployer.deploy(AddressList);
     deployer.deploy(Owned);
     deployer.deploy(Destroyable);
-
-    deployer.link(Owned, Object);
-    deployer.link(Destroyable, Object);
     deployer.deploy(Object);
 
     deployer.link(AddressList, ACLStorage);
     deployer.deploy(ACLStorage);
-
-    deployer.link(ACLStorage, ACL);
-    deployer.link(AddressList, ACL);
     deployer.deploy(ACL);
 };
