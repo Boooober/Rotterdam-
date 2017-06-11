@@ -18,54 +18,66 @@ export default class Web3Service {
 
     createContract(hash) {
         return this.$q((resolve, reject) => {
-            var greeter = this.contract.new(hash, {
-                from: this.web3.eth.accounts[0],
-                data: greeterContract.unlinked_binary,
-                gas: 1000000
-            }, function (e, contract) {
-                if (e) {
-                    reject(e);
-                    return;
-                }
+            try {
+                var greeter = this.contract.new(hash, {
+                    from: this.account, //this.web3.eth.accounts[0],
+                    data: greeterContract.unlinked_binary,
+                    gas: 1000000
+                }, function (e, contract) {
+                    if (e) {
+                        reject(e);
+                        return;
+                    }
 
-                if (!contract.address) {
-                    console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
-                } else {
-                    resolve(contract);
-                    console.log("Contract mined! Address: " + contract.address);
-                    console.log(contract);
-                }
-            })
+                    if (!contract.address) {
+                        console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
+                    } else {
+                        resolve(contract);
+                        console.log("Contract mined! Address: " + contract.address);
+                        console.log(contract);
+                    }
+                })
+            } catch (e) {
+                reject(e);
+            }
         })
     }
 
     approveContract(address) {
         return this.$q((resolve, reject) => {
-            this.contract.at(address).approve({
-                gas: 200000,
-                from: this.account,
-            }, (err, result) => {
-                if(err) {
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            });
+            try {
+                this.contract.at(address).approve({
+                    gas: 200000,
+                    from: this.account,
+                }, (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result)
+                    }
+                });
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
     rejectContract(address) {
         return this.$q((resolve, reject) => {
-            this.contract.at(address).reject({
-                gas: 200000,
-                from: this.account,
-            }, (err, result) => {
-                if(err) {
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            });
+            try {
+                this.contract.at(address).reject({
+                    gas: 200000,
+                    from: this.account,
+                }, (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result)
+                    }
+                });
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 

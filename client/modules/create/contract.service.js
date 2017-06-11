@@ -8,7 +8,7 @@ export default class CreateService {
     saveContract(data) {
         const hash = this.Web3Service.web3.sha3(data.body, {encoding: 'hex'});
 
-        this.Web3Service.createContract(hash)
+        return this.Web3Service.createContract(hash)
             .then((contract) => {
                 this.contracts.push({
                     title: data.title,
@@ -29,10 +29,14 @@ export default class CreateService {
             return;
         }
 
-        this.Web3Service.approveContract(address).then((transactionId) => {
-            contract.approved = true;
-            window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
-        });
+        this.Web3Service.approveContract(address)
+            .then((transactionId) => {
+                contract.approved = true;
+                window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+            })
+            .catch(e => {
+                window.alert(e);
+            });
     }
 
     reject(address) {
@@ -42,10 +46,15 @@ export default class CreateService {
             return;
         }
 
-        this.Web3Service.rejectContract(address).then((transactionId) => {
-            contract.approved = false;
-            window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
-        });
+        this.Web3Service.rejectContract(address)
+            .then((transactionId) => {
+                contract.approved = false;
+                window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+            })
+            .catch(e => {
+                window.alert(e);
+            });
+
     }
 
     getContracts() {

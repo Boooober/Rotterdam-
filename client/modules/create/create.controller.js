@@ -6,6 +6,9 @@ export default class CreateController {
     }
 
     createContract() {
-        this.ContractService.saveContract(this.contract);
+        this.ContractService.saveContract(this.contract)
+            .catch(function (error) {
+                window.alert(error);
+            });
     }
 }

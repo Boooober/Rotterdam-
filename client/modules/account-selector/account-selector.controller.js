@@ -7,7 +7,11 @@ export default class CreateController {
     }
 
     setAccount() {
-        this.Web3Service.setAccount(this.account, this.password);
-        this.$state.go('home');
+        try {
+            this.Web3Service.setAccount(this.account, this.password);
+            this.$state.go('home');
+        } catch (e) {
+            window.alert(e.message);
+        }
     }
 }
