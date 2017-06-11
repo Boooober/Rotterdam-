@@ -1,12 +1,22 @@
 pragma solidity ^0.4.0;
-import 'lib/AddressMap.sol';
+import './core/App.sol';
 
-contract Document {
-    AddressMap.Data groups;
+contract Document is DepartmentStorage, PresetManager { // Such composition should be discussed
 
-    using AddressList for AddressList.Data;
-    using AddressMap for AddressMap.Data;
+    function createApp(string presetName) {
+    //  TODO create contract and save it by address
+        //new App(presets[sha3(presetName)]);
 
-    function approve() constant returns (string)
-    { return groups.keyOf[msg.sender]; }
+    }
+
+    function getAppsToApprove() returns (address[]){
+        var currentUserGroup = getType(msg.sender);
+        // TODO implement getAppsByGroup
+        return getAppsByGroup(currentUserGroup);
+    }
+
+    function approve(address app) constant returns (string) {
+        var choosenApp = getAppByAddress(app);
+        choosenApp.sign(msg.sender);
+    }
 }

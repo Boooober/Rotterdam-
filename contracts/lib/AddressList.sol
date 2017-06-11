@@ -62,7 +62,7 @@ library AddressList {
      */
     function append(Data storage _data, address _item, address _to) {
         // Unable to contain double element
-        if (_data.isContain[_item]) throw;
+        if (_data.isContain[_item]) { throw; }
 
         // Empty list
         if (_data.head == 0) {
@@ -130,7 +130,7 @@ library AddressList {
      * @param _item is a removed list element
      */
     function remove(Data storage _data, address _item) {
-        if (!_data.isContain[_item]) throw;
+        if (!_data.isContain[_item]) { throw; }
 
         var elemPrev = _data.prevOf[_item];
         var elemNext = _data.nextOf[_item];

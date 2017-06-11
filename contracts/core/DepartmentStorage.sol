@@ -25,6 +25,7 @@ contract DepartmentStorage is Object {
         if (mems.first() == 0) {
             departments[departments.length++] = _type;
             mems.append(_firstMember);
+            memberGroups[_member] = _type;
         }
     }
 

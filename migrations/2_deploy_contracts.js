@@ -18,8 +18,8 @@ module.exports = function (deployer) {
     deployer.deploy(Owned);
     deployer.deploy(Destroyable);
     deployer.deploy(Object);
-    deployer.deploy(ACLStorage);
-    deployer.deploy(ACL);
+    // deployer.deploy(ACLStorage);
+    // deployer.deploy(ACL);
     deployer.deploy(DepartmentStorage);
-    deployer.deploy(Document);
+    // deployer.deploy(Document);
 };
