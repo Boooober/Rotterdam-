@@ -2,7 +2,18 @@ import '../assets/styles.scss';
 import homeModule from './home/home.module';
 import createModule from './create/create.module';
 import listModule from './list/list.module';
-angular.module('rotterdam', [createModule, homeModule, listModule]);
+import Web3Service from './web3.service';
+import run from './app.run';
+import config from './app.config';
+import accountSelectorComponent from './account-selector/account-selector.component';
+import headerComponent from './header/header.component';
+
+angular.module('rotterdam', [createModule, homeModule, listModule])
+    .component('accountSelector', accountSelectorComponent)
+    .component('header', headerComponent)
+    .config(config)
+    .run(run)
+    .service('Web3Service', Web3Service);
 
 // // Import libraries we need.
 // import { default as Web3} from 'web3';

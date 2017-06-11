@@ -1,13 +1,39 @@
 export default class CreateService {
-    saveContract(contract) {
-        console.log(contract);
+    constructor(Web3Service) {
+        this.Web3Service = Web3Service;
+        this.contracts = JSON.parse(window.localStorage.getItem('contracts')) || [];
+    }
+
+    saveContract(data) {
+        const hash = this.Web3Service.web3.sha3(data.body, {encoding: 'hex'});
+
+        this.Web3Service.createContract(hash)
+            .then((contract) => {
+                this.contracts.push({
+                    title: data.title,
+                    body: data.body,
+                    address: contract.address,
+                    approved: null
+                });
+
+                window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+            });
+    }
+
+    approve(address) {
+        const contract = this.contracts.find(item => item.address === address);
+
+        if (contract.approved !== null) {
+            return;
+        }
+
+        this.Web3Service.approveContract(address).then((transactionId) => {
+            contract.approved = true;
+            window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+        });
     }
 
     getContracts() {
-        console.log('asd');
-        return Promise.resolve([
-            { title: 'Buy a sport car', address: '278397rg2gf2gd9723dfg2792d' },
-            { title: 'Buy an elephant', address: 'f2gd9723dfg2792d278397rg2g' }
-        ]);
+        return Promise.resolve(this.contracts);
     }
 }
