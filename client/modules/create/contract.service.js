@@ -1,6 +1,7 @@
 export default class CreateService {
-    constructor(Web3Service) {
+    constructor(Web3Service, $state) {
         this.Web3Service = Web3Service;
+        this.$state = $state;
         this.contracts = JSON.parse(window.localStorage.getItem('contracts')) || [];
     }
 
@@ -17,6 +18,7 @@ export default class CreateService {
                 });
 
                 window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+                this.$state.go('list');
             });
     }
 
@@ -29,6 +31,19 @@ export default class CreateService {
 
         this.Web3Service.approveContract(address).then((transactionId) => {
             contract.approved = true;
+            window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+        });
+    }
+
+    reject(address) {
+        const contract = this.contracts.find(item => item.address === address);
+
+        if (contract.approved !== null) {
+            return;
+        }
+
+        this.Web3Service.rejectContract(address).then((transactionId) => {
+            contract.approved = false;
             window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
         });
     }

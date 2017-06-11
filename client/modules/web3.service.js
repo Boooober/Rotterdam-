@@ -54,6 +54,21 @@ export default class Web3Service {
         });
     }
 
+    rejectContract(address) {
+        return this.$q((resolve, reject) => {
+            this.contract.at(address).reject({
+                gas: 200000,
+                from: this.account,
+            }, (err, result) => {
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve(result)
+                }
+            });
+        });
+    }
+
     isContractValid(address, body) {
         const hash = this.web3.sha3(body, {encoding: 'hex'});
         const contract = this.contract.at(address);

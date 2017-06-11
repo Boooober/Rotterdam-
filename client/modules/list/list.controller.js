@@ -27,6 +27,7 @@ export default class ListController {
     }
 
     reject(address) {
+        this.ContractService.reject(address);
         console.log(`${address} rejected`);
     }
 }

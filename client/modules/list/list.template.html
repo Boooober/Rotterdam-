@@ -7,20 +7,27 @@
                 <div
                     style="display: inline-block;"
                     class="col-md-6 col-lg-6 col-sm-6 col-xs-8"
-                >{{ contract.title }} <span>{{ contract.isValid }}</span>
+                >
+                    <i class="fa fa-check" ng-show="contract.isValid"></i>
+                    <i class="fa fa-close" ng-show="!contract.isValid"></i>
+                    <span ng-show="contract.isValid">[VALID]</span>
+                    <span ng-show="!contract.isValid">[INVALID]</span>
+                    {{ contract.title }}
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-4" ng-if="contract.approved === null">
                     <button
                             ng-click="listCtrl.approve(contract.address)"
+                            ng-disabled="!contract.isValid"
                             class="btn btn-primary col-md-2 col-lg-2 col-sm-2">
                         Approve
                     </button>
 
-                    <!--<button-->
-                            <!--ng-click="listCtrl.reject(contract.address)"-->
-                            <!--class="btn btn-warning col-md-2 col-lg-2 col-sm-2">-->
-                        <!--Reject-->
-                    <!--</button>-->
+                    <button
+                            ng-click="listCtrl.reject(contract.address)"
+                            ng-disabled="!contract.isValid"
+                            class="btn btn-warning col-md-2 col-lg-2 col-sm-2">
+                        Reject
+                    </button>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-4" ng-if="contract.approved !== null">
                     <span ng-if="::contract.approved">Approved</span>

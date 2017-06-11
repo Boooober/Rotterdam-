@@ -2,8 +2,11 @@
     <div class="pull-right"
          ng-show="$ctrl.Web3Service.account">
         Welcome {{$ctrl.Web3Service.account}}
+        <a class="btn btn-sm btn-link" ui-sref="account">[change]</a>
     </div>
 
-    <a class="btn btn-sm btn-link pull-right" ui-sref="account">Change account</a>
+    <a class="btn btn-sm btn-link pull-right"
+       ng-show="!$ctrl.Web3Service.account"
+       ui-sref="account">Select account</a>
 </div>
 
