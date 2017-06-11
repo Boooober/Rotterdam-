@@ -12,5 +12,4 @@ contract DepartmentStorage is Object {
     function addMember(string _type, address _member) onlyOwner {
         memberGroups[_member] = sha3(_type);
     }
-
 }
