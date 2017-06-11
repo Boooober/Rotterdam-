@@ -25,6 +25,7 @@ module.exports = {
             inject: 'head',
             chunks: ['commons', 'vendors', 'app'],
             filename: 'index.html',
+            favicon: 'client/favicon.ico',
             template: path.resolve(__dirname, 'client/index.html')
         }),
         new ExtractTextPlugin({
