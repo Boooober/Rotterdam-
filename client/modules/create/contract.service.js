@@ -60,4 +60,14 @@ export default class CreateService {
     getContracts() {
         return Promise.resolve(this.contracts);
     }
+
+    getContract(id) {
+        return this.contracts[id];
+    }
+
+    updateContract(id, tilte, body) {
+        this.contracts[id].title = tilte;
+        this.contracts[id].body = body;
+        window.localStorage.setItem('contracts', JSON.stringify(this.contracts));
+    }
 }

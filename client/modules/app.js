@@ -7,10 +7,12 @@ import run from './app.run';
 import config from './app.config';
 import accountSelectorComponent from './account-selector/account-selector.component';
 import headerComponent from './header/header.component';
+import editComponent from './edit/edit.component';
 
 angular.module('rotterdam', [createModule, homeModule, listModule])
     .component('accountSelector', accountSelectorComponent)
     .component('header', headerComponent)
+    .component('edit', editComponent)
     .config(config)
     .run(run)
     .service('Web3Service', Web3Service);

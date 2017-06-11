@@ -11,7 +11,7 @@
                         <span class="label label-primary" ng-show="contract.isValid">Valid</span>
                         <span class="label label-danger" ng-show="!contract.isValid">Invalid</span>
                     </td>
-                    <td>{{ contract.title }}</td>
+                    <td><a ui-sref="edit({id: $index})">{{ contract.title }}</a></td>
                     <td style="text-align: right">
                         <button
                                 ng-click="listCtrl.approve(contract.address)"
