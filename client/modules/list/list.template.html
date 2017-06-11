@@ -1,0 +1,26 @@
+<div id="wrapper">
+    <div class="gray-bg">
+        <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+            <a class="btn btn-sm btn-white btn-block m-b" ui-sref="home">Back</a>
+            <h3 class="m-b">My Contracts</h3>
+            <div ng-repeat="contract in listCtrl.contracts" class="row m-b">
+                <div
+                    style="display: inline-block;"
+                    class="col-md-6 col-lg-6 col-sm-6">{{ contract.title }}
+                </div>
+                <button
+                    ng-click="listCtrl.approve(contract.address)"
+                    class="btn btn-primary col-md-2 col-lg-2 col-sm-2">
+                    Approve
+                </button>
+                <div class="col-md-1 col-lg-1 col-sm-1"></div>
+                <button
+                    ng-click="listCtrl.reject(contract.address)"
+                    class="btn btn-warning col-md-2 col-lg-2 col-sm-2">
+                    Reject
+                </button>
+                <div class="col-md-1 col-lg-1 col-sm-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
