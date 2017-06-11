@@ -39,6 +39,10 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
+                test: /\.sol/,
+                use: 'raw-loader'
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [

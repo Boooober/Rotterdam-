@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <form class="form-inline" ng-submit="$ctrl.setAccount()">
+            <div class="form-group">
+                <label for="account">Account</label>
+                <select id="account"
+                        class="form-control"
+                        required
+                        ng-options="item as item for item in $ctrl.accounts"
+                        ng-model="$ctrl.account"
+                ></select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password"
+                       class="form-control"
+                       required
+                       type="password"
+                       ng-model="$ctrl.password">
+            </div>
+
+            <button class="btn btn-default pull-right" type="submit">Apply</button>
+        </form>
+    </div>
+</div>
