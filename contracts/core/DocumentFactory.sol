@@ -8,7 +8,7 @@ contract DocumentFactory {
        ds = _ds;
     }
 
-    function createNew (bytes32 _hash){
-        new Document(ds, _hash);
+    function createNew (bytes32 _hash) returns (Document){
+        return new Document(ds, _hash);
     }
 }
