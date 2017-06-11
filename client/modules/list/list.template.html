@@ -3,37 +3,36 @@
         <div class="wrapper wrapper-content animated fadeInRight ibox-content">
             <a class="btn btn-sm btn-white btn-block m-b" ui-sref="home">Back</a>
             <h3 class="m-b">My Contracts</h3>
-            <div ng-repeat="contract in listCtrl.contracts" class="row m-b">
-                <div
-                    style="display: inline-block;"
-                    class="col-md-6 col-lg-6 col-sm-6 col-xs-8"
-                >
-                    <i class="fa fa-check" ng-show="contract.isValid"></i>
-                    <i class="fa fa-close" ng-show="!contract.isValid"></i>
-                    <span ng-show="contract.isValid">[VALID]</span>
-                    <span ng-show="!contract.isValid">[INVALID]</span>
-                    {{ contract.title }}
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-4" ng-if="contract.approved === null">
-                    <button
-                            ng-click="listCtrl.approve(contract.address)"
-                            ng-disabled="!contract.isValid"
-                            class="btn btn-primary col-md-2 col-lg-2 col-sm-2">
-                        Approve
-                    </button>
 
-                    <button
-                            ng-click="listCtrl.reject(contract.address)"
-                            ng-disabled="!contract.isValid"
-                            class="btn btn-warning col-md-2 col-lg-2 col-sm-2">
-                        Reject
-                    </button>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-4" ng-if="contract.approved !== null">
-                    <span ng-if="::contract.approved">Approved</span>
-                    <span ng-if="::!contract.approved">Rejected</span>
-                </div>
-            </div>
+            <table class="table">
+                <tbody >
+                <tr ng-repeat="contract in listCtrl.contracts">
+                    <td>
+                        <span class="label label-primary" ng-show="contract.isValid">Valid</span>
+                        <span class="label label-danger" ng-show="!contract.isValid">Invalid</span>
+                    </td>
+                    <td>{{ contract.title }}</td>
+                    <td style="text-align: right">
+                        <button
+                                ng-click="listCtrl.approve(contract.address)"
+                                ng-disabled="!contract.isValid"
+                                class="btn btn-default btn-sm">
+                            Approve
+                        </button>
+
+                        <button
+                                ng-click="listCtrl.reject(contract.address)"
+                                ng-disabled="!contract.isValid"
+                                class="btn btn-warning btn-sm">
+                            Reject
+                        </button>
+                    </td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td colspan="3"><pre>{{ contract.body }}</pre></td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
