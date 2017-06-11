@@ -10,10 +10,10 @@ const DepartmentStorage = artifacts.require('./core/DepartmentStorage.sol');
 const Document = artifacts.require('./core/Document.sol');
 
 module.exports = function (deployer) {
-    deployer.deploy(AddressListLib);
-    deployer.link(AddressListLib, [AddressMapLib, ACL,  ACLStorage, DepartmentStorage, Document]);
-    deployer.deploy(AddressMapLib);
-    deployer.link(AddressMapLib, Document);
+    // deployer.deploy(AddressListLib);
+    // deployer.link(AddressListLib, [AddressMapLib, ACL,  ACLStorage, DepartmentStorage, Document]);
+    // deployer.deploy(AddressMapLib);
+    // deployer.link(AddressMapLib, Document);
 
     deployer.deploy(Owned);
     deployer.deploy(Destroyable);
@@ -22,6 +22,4 @@ module.exports = function (deployer) {
     // deployer.deploy(ACL);
     deployer.deploy(DepartmentStorage);
     deployer.deploy(Document);
-
-    deployer.deploy(DepartmentStorage);
 };
