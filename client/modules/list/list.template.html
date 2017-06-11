@@ -12,7 +12,7 @@
                         <span class="label label-danger" ng-show="!contract.isValid">Invalid</span>
                     </td>
                     <td><a ui-sref="edit({id: $index})">{{ contract.title }}</a></td>
-                    <td style="text-align: right">
+                    <td style="text-align: right" ng-if="contract.approved === null">
                         <button
                                 ng-click="listCtrl.approve(contract.address)"
                                 ng-disabled="!contract.isValid"
@@ -26,6 +26,10 @@
                                 class="btn btn-warning btn-sm">
                             Reject
                         </button>
+                    </td>
+                    <td ng-if="contract.approved !== null">
+                        <span ng-show="contract.approved">Approved</span>
+                        <span ng-show="!contract.approved">Declined</span>
                     </td>
                 </tr>
                 <!--<tr>-->
