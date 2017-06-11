@@ -6,20 +6,20 @@ const Object = artifacts.require('./common/Object.sol');
 const ACLStorage = artifacts.require('./acl/ACLStorage.sol');
 const ACL = artifacts.require('./acl/ACL.sol');
 
+const Approvers = artifacts.require('./core/Approvers.sol');
 const DepartmentStorage = artifacts.require('./core/DepartmentStorage.sol');
 const Document = artifacts.require('./core/Document.sol');
+const DocumentFactory = artifacts.require('./core/DocumentFactory.sol');
 
 module.exports = function (deployer) {
-    // deployer.deploy(AddressListLib);
-    // deployer.link(AddressListLib, [AddressMapLib, ACL,  ACLStorage, DepartmentStorage, Document]);
-    // deployer.deploy(AddressMapLib);
-    // deployer.link(AddressMapLib, Document);
 
     deployer.deploy(Owned);
     deployer.deploy(Destroyable);
     deployer.deploy(Object);
-    // deployer.deploy(ACLStorage);
-    // deployer.deploy(ACL);
-    deployer.deploy(DepartmentStorage);
-    deployer.deploy(Document);
+
+    deployer.deploy(DepartmentStorage).then(function() {
+        deployer.deploy(Approvers);
+        //deployer.deploy(Document);
+        return deployer.deploy(DocumentFactory, DepartmentStorage.address);
+    });
 };
