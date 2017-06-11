@@ -6,12 +6,12 @@ contract DepartmentStorage is Object {
     // Departments list
     string[] public departments;
 
-    mapping(address => string) memberGroups;
+    mapping(address => bytes32) memberGroups;
 
     mapping(bytes32 => AddressList.Data) members;
     using AddressList for AddressList.Data;
 
-    function getType(address _member) constant returns (string) {
+    function getGroupOf(address _member) constant returns (bytes32) {
         return memberGroups[_member];
     }
 
@@ -25,7 +25,7 @@ contract DepartmentStorage is Object {
         if (mems.first() == 0) {
             departments[departments.length++] = _type;
             mems.append(_firstMember);
-            memberGroups[_member] = _type;
+            memberGroups[_firstMember] = sha3(_type);
         }
     }
 
@@ -36,7 +36,7 @@ contract DepartmentStorage is Object {
      */
     function addMember(string _type, address _member) onlyOwner {
         members[sha3(_type)].append(_member);
-        memberGroups[_member] = _type;
+        memberGroups[_member] = sha3(_type);
     }
 
     /**

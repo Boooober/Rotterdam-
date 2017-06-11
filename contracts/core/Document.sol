@@ -1,22 +1,20 @@
 pragma solidity ^0.4.0;
-import './core/App.sol';
+import 'lib/AddressMap.sol';
+import './DepartmentStorage.sol';
 
-contract Document is DepartmentStorage, PresetManager { // Such composition should be discussed
+contract Document {
+    uint public status;
+    DepartmentStorage ds = new DepartmentStorage();
 
-    function createApp(string presetName) {
-    //  TODO create contract and save it by address
-        //new App(presets[sha3(presetName)]);
-
+    function Document() {
+        status = 0;
     }
 
-    function getAppsToApprove() returns (address[]){
-        var currentUserGroup = getType(msg.sender);
-        // TODO implement getAppsByGroup
-        return getAppsByGroup(currentUserGroup);
-    }
-
-    function approve(address app) constant returns (string) {
-        var choosenApp = getAppByAddress(app);
-        choosenApp.sign(msg.sender);
+    function approve() {
+        if (ds.getGroupOf(msg.sender) == sha3("fin")) {
+            status = 1;
+        } else {
+            throw;
+        }
     }
 }
